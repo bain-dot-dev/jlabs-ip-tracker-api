@@ -168,8 +168,9 @@ export const deleteHistory = async (
     });
 
     // Check if any entries don't belong to the user
+    // entriesToDelete has explicit typing to avoid implicit any in filter callback
     const unauthorizedEntries = entriesToDelete.filter(
-      (entry) => entry.userId !== userId
+      (entry: { id: string; userId: string }) => entry.userId !== userId
     );
 
     if (unauthorizedEntries.length > 0) {
